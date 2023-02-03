@@ -15,7 +15,7 @@ class students:
 
             self._PMStudents = int(input("Enter number of PM Students: "))
             self._BAStudents = int(input("Enter number of BA Students: "))
-            self._GLStudents = int(input("Enter number of GL Students: "))
+            self._GLMStudents = int(input("Enter number of GLM Students: "))
             self._FSStudents = int(input("Enter number of FS Students: "))
             self._DXDStudents = int(input("Enter number of DXD Students: "))
             self._BKStudents = int(input("Enter number of BK Students: "))
@@ -32,7 +32,7 @@ class students:
 
         cohortList.append(self.divide_to_cohorts(self._PMStudents, 2))
         cohortList.append(self.divide_to_cohorts(self._BAStudents, 3))
-        cohortList.append(self.divide_to_cohorts(self._GLStudents, 4))
+        cohortList.append(self.divide_to_cohorts(self._GLMStudents, 4))
         cohortList.append(self.divide_to_cohorts(self._FSStudents, 5))
         cohortList.append(self.divide_to_cohorts(self._DXDStudents, 6))
         cohortList.append(self.divide_to_cohorts(self._BKStudents, 7))
@@ -66,6 +66,6 @@ class students:
 
         return (cohortProgramList)
     
-if __name__ == "__main__":
-    x = students()
-    x.cohorts_final()
+# if __name__ == "__main__":
+#     x = students()
+#     x.cohorts_final()
