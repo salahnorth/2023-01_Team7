@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'untitled.ui'
+# Form implementation generated from reading ui file 'schedule.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.8
 #
@@ -9,84 +9,113 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import students
 
 class Ui_MainWindow(object):
+
     def setupUi(self, MainWindow):
+        # Set up window
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(962, 728)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
+        
+        # Set title
         self.Title = QtWidgets.QLabel(self.centralwidget)
         self.Title.setObjectName("Title")
         self.verticalLayout.addWidget(self.Title)
+
         self.formLayout = QtWidgets.QFormLayout()
         self.formLayout.setObjectName("formLayout")
+
+        # BCOM info
         self.BCOM = QtWidgets.QLabel(self.centralwidget)
         self.BCOM.setObjectName("BCOM")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.BCOM)
         self.BCOMEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.BCOMEntry.setObjectName("BCOMEntry")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.BCOMEntry)
+
+        # PCOM info
         self.PCOM = QtWidgets.QLabel(self.centralwidget)
         self.PCOM.setObjectName("PCOM")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.SpanningRole, self.PCOM)
         self.PCOMEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.PCOMEntry.setObjectName("PCOMEntry")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.PCOMEntry)
+
+        # PM info
         self.PM = QtWidgets.QLabel(self.centralwidget)
         self.PM.setObjectName("PM")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.PM)
         self.PMEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.PMEntry.setObjectName("PMEntry")
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.PMEntry)
+
+        # BA info
         self.BA = QtWidgets.QLabel(self.centralwidget)
         self.BA.setObjectName("BA")
         self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.BA)
         self.BAEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.BAEntry.setObjectName("BAEntry")
         self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.BAEntry)
+
+        #GLM info
+        self.GLM = QtWidgets.QLabel(self.centralwidget)
+        self.GLM.setObjectName("GLM")
+        self.formLayout.setWidget(8, QtWidgets.QFormLayout.SpanningRole, self.GLM)
         self.GLMEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.GLMEntry.setObjectName("GLMEntry")
         self.formLayout.setWidget(9, QtWidgets.QFormLayout.FieldRole, self.GLMEntry)
+
+        # FS info
         self.FS = QtWidgets.QLabel(self.centralwidget)
         self.FS.setObjectName("FS")
         self.formLayout.setWidget(10, QtWidgets.QFormLayout.LabelRole, self.FS)
         self.FSEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.FSEntry.setObjectName("FSEntry")
         self.formLayout.setWidget(11, QtWidgets.QFormLayout.FieldRole, self.FSEntry)
+
+        # DXD info
         self.DXD = QtWidgets.QLabel(self.centralwidget)
         self.DXD.setObjectName("DXD")
         self.formLayout.setWidget(12, QtWidgets.QFormLayout.SpanningRole, self.DXD)
         self.DXDEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.DXDEntry.setObjectName("DXDEntry")
         self.formLayout.setWidget(13, QtWidgets.QFormLayout.FieldRole, self.DXDEntry)
+
+        # BK info
         self.BK = QtWidgets.QLabel(self.centralwidget)
         self.BK.setObjectName("BK")
         self.formLayout.setWidget(14, QtWidgets.QFormLayout.LabelRole, self.BK)
         self.BKEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.BKEntry.setObjectName("BKEntry")
         self.formLayout.setWidget(15, QtWidgets.QFormLayout.FieldRole, self.BKEntry)
+
+        # SCM info
         self.SCM = QtWidgets.QLabel(self.centralwidget)
         self.SCM.setObjectName("SCM")
         self.formLayout.setWidget(16, QtWidgets.QFormLayout.LabelRole, self.SCM)
         self.SCMEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.SCMEntry.setObjectName("SCMEntry")
         self.formLayout.setWidget(17, QtWidgets.QFormLayout.FieldRole, self.SCMEntry)
+
+        # OK button and Discard button
         self.buttonBox = QtWidgets.QDialogButtonBox(self.centralwidget)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Discard|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.formLayout.setWidget(18, QtWidgets.QFormLayout.FieldRole, self.buttonBox)
-        self.GLM = QtWidgets.QLabel(self.centralwidget)
-        self.GLM.setObjectName("GLM")
-        self.formLayout.setWidget(8, QtWidgets.QFormLayout.SpanningRole, self.GLM)
+
+        # TODO: deal with discard
+        self.buttonBox.clicked.connect(self.show_line)
+
         self.verticalLayout.addLayout(self.formLayout)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+
+        # Set menu attributes
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 962, 21))
         self.menubar.setObjectName("menubar")
@@ -103,6 +132,7 @@ class Ui_MainWindow(object):
         self.actionQuit.setObjectName("actionQuit")
         self.actionOpen = QtWidgets.QAction(MainWindow)
         self.actionOpen.setObjectName("actionOpen")
+
         self.menuStudents.addAction(self.File)
         self.menuStudents.addAction(self.actionSave)
         self.menuStudents.addAction(self.actionSave_As)
@@ -113,19 +143,38 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    def show_line(self):
+        # TODO: Put input to students class
+        studentNum = students
+        studentNum._BCOMStudents = int(self.BCOMEntry.text())
+        studentNum._PCOMStudents = int(self.PCOMEntry.text())
+        studentNum._PMStudents = int(self.PMEntry.text())
+        studentNum._BAStudents = int(self.BAEntry.text())
+        studentNum._GLMStudents = int(self.GLMEntry.text())
+        studentNum._FSStudents = int(self.FSEntry.text())
+        studentNum._DXDStudents = int(self.DXDEntry.text())
+        studentNum._BKStudents = int(self.BKEntry.text())
+        studentNum._SCMStudents = int(self.SCMEntry.text())
+        studentNum.students.cohorts_final()
+        
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
+        # Set window name
         MainWindow.setWindowTitle(_translate("MainWindow", "Schedule Maker"))
+
+        # Set all the text and input boxes
         self.Title.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; color:#ff0000;\">Please enter the amount of students that registered for each program. An integer input is required.</span></p></body></html>"))
         self.BCOM.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Business Communication (BCOM)</span></p></body></html>"))
-        self.PCOM.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Professional Communication (PCOM)    </span></p></body></html>"))
+        self.PCOM.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Professional Communication (PCOM)</span></p></body></html>"))
         self.PM.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Project Management (PM)</span></p></body></html>"))
         self.BA.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Business Analysis (BA)</span></p></body></html>"))
-        self.FS.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Full Stack Web Development (FS)    </span></p></body></html>"))
+        self.FS.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Full Stack Web Development (FS)</span></p></body></html>"))
         self.DXD.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Digital Experience Design Foundation (DXD)</span></p></body></html>"))
-        self.BK.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">BookKeeping Certificate (BK)        </span></p></body></html>"))
+        self.BK.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">BookKeeping Certificate (BK) </span></p></body></html>"))
         self.SCM.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Supply Chain Management (SCM)</span></p></body></html>"))
-        self.GLM.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Supply Chain Management &amp; Logistics (GLM)</span></p></body></html>"))
+        self.GLM.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Global Logistics Management (GLM)</span></p></body></html>"))
+
+        # Menu items
         self.menuStudents.setTitle(_translate("MainWindow", "File"))
         self.File.setText(_translate("MainWindow", "New"))
         self.actionSave.setText(_translate("MainWindow", "Save"))
@@ -134,7 +183,7 @@ class Ui_MainWindow(object):
         self.actionOpen.setText(_translate("MainWindow", "Open "))
 
 
-if __name__ == "__main__":
+def main():
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
@@ -142,3 +191,6 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()
