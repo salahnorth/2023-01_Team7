@@ -17,6 +17,7 @@ class Ui_MainWindow(object):
         # Set up window
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(962, 728)
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -35,6 +36,7 @@ class Ui_MainWindow(object):
         self.BCOM = QtWidgets.QLabel(self.centralwidget)
         self.BCOM.setObjectName("BCOM")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.BCOM)
+
         self.BCOMEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.BCOMEntry.setObjectName("BCOMEntry")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.BCOMEntry)
@@ -43,6 +45,7 @@ class Ui_MainWindow(object):
         self.PCOM = QtWidgets.QLabel(self.centralwidget)
         self.PCOM.setObjectName("PCOM")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.SpanningRole, self.PCOM)
+
         self.PCOMEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.PCOMEntry.setObjectName("PCOMEntry")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.PCOMEntry)
@@ -51,6 +54,7 @@ class Ui_MainWindow(object):
         self.PM = QtWidgets.QLabel(self.centralwidget)
         self.PM.setObjectName("PM")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.PM)
+
         self.PMEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.PMEntry.setObjectName("PMEntry")
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.PMEntry)
@@ -59,6 +63,7 @@ class Ui_MainWindow(object):
         self.BA = QtWidgets.QLabel(self.centralwidget)
         self.BA.setObjectName("BA")
         self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.BA)
+
         self.BAEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.BAEntry.setObjectName("BAEntry")
         self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.BAEntry)
@@ -67,6 +72,7 @@ class Ui_MainWindow(object):
         self.GLM = QtWidgets.QLabel(self.centralwidget)
         self.GLM.setObjectName("GLM")
         self.formLayout.setWidget(8, QtWidgets.QFormLayout.SpanningRole, self.GLM)
+
         self.GLMEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.GLMEntry.setObjectName("GLMEntry")
         self.formLayout.setWidget(9, QtWidgets.QFormLayout.FieldRole, self.GLMEntry)
@@ -75,6 +81,7 @@ class Ui_MainWindow(object):
         self.FS = QtWidgets.QLabel(self.centralwidget)
         self.FS.setObjectName("FS")
         self.formLayout.setWidget(10, QtWidgets.QFormLayout.LabelRole, self.FS)
+
         self.FSEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.FSEntry.setObjectName("FSEntry")
         self.formLayout.setWidget(11, QtWidgets.QFormLayout.FieldRole, self.FSEntry)
@@ -83,6 +90,7 @@ class Ui_MainWindow(object):
         self.DXD = QtWidgets.QLabel(self.centralwidget)
         self.DXD.setObjectName("DXD")
         self.formLayout.setWidget(12, QtWidgets.QFormLayout.SpanningRole, self.DXD)
+
         self.DXDEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.DXDEntry.setObjectName("DXDEntry")
         self.formLayout.setWidget(13, QtWidgets.QFormLayout.FieldRole, self.DXDEntry)
@@ -91,6 +99,7 @@ class Ui_MainWindow(object):
         self.BK = QtWidgets.QLabel(self.centralwidget)
         self.BK.setObjectName("BK")
         self.formLayout.setWidget(14, QtWidgets.QFormLayout.LabelRole, self.BK)
+
         self.BKEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.BKEntry.setObjectName("BKEntry")
         self.formLayout.setWidget(15, QtWidgets.QFormLayout.FieldRole, self.BKEntry)
@@ -99,6 +108,7 @@ class Ui_MainWindow(object):
         self.SCM = QtWidgets.QLabel(self.centralwidget)
         self.SCM.setObjectName("SCM")
         self.formLayout.setWidget(16, QtWidgets.QFormLayout.LabelRole, self.SCM)
+
         self.SCMEntry = QtWidgets.QLineEdit(self.centralwidget)
         self.SCMEntry.setObjectName("SCMEntry")
         self.formLayout.setWidget(17, QtWidgets.QFormLayout.FieldRole, self.SCMEntry)
@@ -107,11 +117,11 @@ class Ui_MainWindow(object):
         self.buttonBox = QtWidgets.QDialogButtonBox(self.centralwidget)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Discard|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
+
         self.formLayout.setWidget(18, QtWidgets.QFormLayout.FieldRole, self.buttonBox)
 
         # TODO: deal with discard
         self.buttonBox.clicked.connect(self.show_line)
-
         self.verticalLayout.addLayout(self.formLayout)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -119,11 +129,14 @@ class Ui_MainWindow(object):
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 962, 21))
         self.menubar.setObjectName("menubar")
+
         self.menuStudents = QtWidgets.QMenu(self.menubar)
         self.menuStudents.setObjectName("menuStudents")
         MainWindow.setMenuBar(self.menubar)
+
         self.File = QtWidgets.QAction(MainWindow)
         self.File.setObjectName("File")
+
         self.actionSave = QtWidgets.QAction(MainWindow)
         self.actionSave.setObjectName("actionSave")
         self.actionSave_As = QtWidgets.QAction(MainWindow)
@@ -181,7 +194,6 @@ class Ui_MainWindow(object):
         self.actionSave_As.setText(_translate("MainWindow", "Save As"))
         self.actionQuit.setText(_translate("MainWindow", "Quit"))
         self.actionOpen.setText(_translate("MainWindow", "Open "))
-
 
 def main():
     import sys
