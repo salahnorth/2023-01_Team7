@@ -8,6 +8,8 @@ Purpose: A basic idea for the Cohort data structure
 class Cohort:
 
     def __init__(self) -> None:
+        #Cohort init 
+        #testing Ignore
         
         self._cohortNumber = 1
         self._isLab = False
