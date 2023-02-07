@@ -2,7 +2,7 @@
 Fahad Ali
 
 # GUI and Cohort functionality
-Created using PyQt5 
+Created using PyQt5. 
 
 # How to run
 Make sure you have PyQt5 installed. To check go to your terminal and type "pip3 show PyQt5". 
