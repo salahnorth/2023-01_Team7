@@ -7,6 +7,7 @@ https://www.geeksforgeeks.org/pyqt5-input-dialog-python/
 https://www.pythonguis.com/tutorials/pyqt-dialogs/
 '''
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
 from students import students
 import sys
 
@@ -47,17 +48,34 @@ class CohortDialog(QDialog):
 		self.resize(500, 400)
 		self.formGroupBox = QGroupBox("Cohort")
   
-		# creating a line edit texts for each program
-		self.PCOM = QLineEdit()
-		self.BCOM = QLineEdit()
-		self.PM = QLineEdit()
-		self.BA = QLineEdit()
-		self.GLM = QLineEdit()
-		self.FS = QLineEdit()
-		self.DXD = QLineEdit()
-		self.BK = QLineEdit()
-		self.SCM = QLineEdit()
+		# creating a line edit texts for each program and set integer parameters
+		onlyInt = QIntValidator()
+		onlyInt.setRange(0, 999)
+  
+		# create spin box for term number
+		self.term = QSpinBox()
+		self.term.setMaximum(3)
+		self.term.setMinimum(1)
 
+		self.PCOM = QLineEdit()
+		self.PCOM.setValidator(onlyInt)
+		self.BCOM = QLineEdit()
+		self.BCOM.setValidator(onlyInt)
+		self.PM = QLineEdit()
+		self.PM.setValidator(onlyInt)
+		self.BA = QLineEdit()
+		self.BA.setValidator(onlyInt)
+		self.GLM = QLineEdit()
+		self.GLM.setValidator(onlyInt)
+		self.FS = QLineEdit()
+		self.FS.setValidator(onlyInt)
+		self.DXD = QLineEdit()
+		self.DXD.setValidator(onlyInt)
+		self.BK = QLineEdit()
+		self.BK.setValidator(onlyInt)
+		self.SCM = QLineEdit()
+		self.SCM.setValidator(onlyInt)
+  
 		# call method that inputs numbers
 		self.setup_input()
 
@@ -78,21 +96,25 @@ class CohortDialog(QDialog):
 	def creat_cohorts(self):
 		# TODO: deal with inputs
 		studentCohort = students()
-		studentCohort._BCOMStudents = self.BCOM.text()
-		studentCohort._PCOMStudents = self.PCOM.text()
-		studentCohort._PMStudents = self.PM.text()
-		studentCohort._BAStudents = self.BA.text()
-		studentCohort._GLMStudents = self.GLM.text()
-		studentCohort._FSStudents = self.FS.text()
-		studentCohort._DXDStudents = self.DXD.text()
-		studentCohort._BKStudents = self.BK.text()
-		studentCohort._SCMStudents = self.SCM.text()
+  
+		studentCohort._term = int(self.term.text())
+		studentCohort._BCOMStudents = int(self.BCOM.text())
+		studentCohort._PCOMStudents = int(self.PCOM.text())
+		studentCohort._PMStudents = int(self.PM.text())
+		studentCohort._BAStudents = int(self.BA.text())
+		studentCohort._GLMStudents = int(self.GLM.text())
+		studentCohort._FSStudents = int(self.FS.text())
+		studentCohort._DXDStudents = int(self.DXD.text())
+		studentCohort._BKStudents = int(self.BK.text())
+		studentCohort._SCMStudents = int(self.SCM.text())
+  
 		print(studentCohort.cohorts_final())
     
 	def setup_input(self):
 		# create a form layout
 		studentInput = QFormLayout()
   
+		studentInput.addRow(QLabel("Input term number: "), self.term) 
 		studentInput.addRow(QLabel("Business Communication (BCOM)"), self.BCOM)
 		studentInput.addRow(QLabel("Professional Communication (PCOM)"), self.PCOM)
 		studentInput.addRow(QLabel("Project Management (PM)"), self.PM) 
