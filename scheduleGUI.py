@@ -1,3 +1,11 @@
+'''
+Author: Fahad Ali
+Student ID: 3099218
+Description: Create main GUI app
+References: 
+https://www.geeksforgeeks.org/pyqt5-input-dialog-python/
+https://www.pythonguis.com/tutorials/pyqt-dialogs/
+'''
 from PyQt5.QtWidgets import *
 from students import students
 import sys
@@ -100,10 +108,12 @@ class CohortDialog(QDialog):
 
 
 def main():
-	app = QApplication(sys.argv)
-	window = MainWindow()
-	window.show()
-	app.exec()
+    from PyQt5.QtCore import pyqtRemoveInputHook
+    pyqtRemoveInputHook()
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    app.exec()
  
 if __name__ == '__main__':
     main()
