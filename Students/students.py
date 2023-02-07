@@ -74,9 +74,3 @@ class students:
                 pass
 
         return (cohortProgramList)
-    
-# if __name__ == "__main__":
-#     x = students()
-#     # temporary for testing purposes
-#     for i in x.cohorts_final():
-#         print(i)
