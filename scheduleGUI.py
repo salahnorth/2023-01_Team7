@@ -9,37 +9,47 @@ https://www.pythonguis.com/tutorials/pyqt-dialogs/
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from students import students
+from PyQt5.QtCore import pyqtRemoveInputHook
 import sys
 
-class MainWindow(QMainWindow):
+
+class MainWindow(QWidget):
     # main window class
     def __init__(self):
         # initialize main window
         super().__init__()
-        self.resize(400, 250)
+        self.resize(600, 400)
         self.setWindowTitle("Schedule")
         self.setupUI()
-
+        
     def cohort_button(self):
         # create cohort dialog
         cohortDialog = CohortDialog()
         cohortDialog.exec()
     
     def schedule_button(self):
-            #TODO: make scheudule functionality and dialog
-            pass
+        scheduleDialog = ScheduleDialog()
+        scheduleDialog.exec()
         
     def setupUI(self):
+        # create layout
+        mainlLayout = QHBoxLayout(self)
+        
         # create cohort button and execute dialog
-        cohortButton = QPushButton("Setup Cohorts?", self)
-        cohortButton.resize(150, 100)
+        cohortButton = QPushButton("Click to Setup Cohorts", self)
+        cohortButton.resize(200, 100)
         cohortButton.clicked.connect(self.cohort_button)
         
         #TODO: make scheudule functionality and dialog
-        # scheduleButton = QPushButton("Schedules", self)
-        # scheduleButton.resize(150, 200)
-        # scheduleButton.clicked.connect(self.schedule_button)
+        scheduleButton = QPushButton("Click to see Schedules", self)
+        scheduleButton.resize(200, 100)
+        scheduleButton.clicked.connect(self.schedule_button)
         
+        # add buttonst to layout
+        mainlLayout.addWidget(cohortButton, 1)
+        mainlLayout.addWidget(scheduleButton, 1)
+        self.setLayout(mainlLayout)
+
 class CohortDialog(QDialog):
     # create cohort dialog
 	def __init__(self):
@@ -86,12 +96,12 @@ class CohortDialog(QDialog):
 		self.buttonBox.accepted.connect(self.creat_cohorts)
 
 		# create a veritcal layout
-		mainLayout = QVBoxLayout()
-		mainLayout.addWidget(self.formGroupBox)
+		cohortLayout = QVBoxLayout()
+		cohortLayout.addWidget(self.formGroupBox)
 		# add button  to the layout
-		mainLayout.addWidget(self.buttonBox)
+		cohortLayout.addWidget(self.buttonBox)
 		# set lay out
-		self.setLayout(mainLayout)
+		self.setLayout(cohortLayout)
   
 	def creat_cohorts(self):
 		# TODO: deal with inputs
@@ -128,10 +138,17 @@ class CohortDialog(QDialog):
 		# set the layout
 		self.formGroupBox.setLayout(studentInput)
 
+class ScheduleDialog(QDialog):
+    # TODO: add schedules
+	def __init__(self):
+		# initialize the window
+		super().__init__()
+		self.resize(500, 400)
+		self.formGroupBox = QGroupBox("Schedules")
 
 def main():
-    from PyQt5.QtCore import pyqtRemoveInputHook
     pyqtRemoveInputHook()
+    
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
