@@ -55,7 +55,7 @@ class students:
         cohortDict = {0:"BC", 1: "PC", 2:"PM", 3:"BA", 4:"GL", 5:"FS", 6:"DXD",\
                       7:"BK", 8:"SCM"}
         cohortProgramList = []
-        cohortGroup = 0
+        cohortGroups = 0
         studentRemaining = 0
         cohortSize = 30 # change to whatever size cohort is needed
 
@@ -64,10 +64,14 @@ class students:
             studentRemaining = students
             # put into cohort groups
             if student % cohortSize == 0: 
-                cohortGroup += 1
+                cohortGroups += 1
                 studentRemaining -= student
-                cohortProgramList.append(f"{cohortDict.get(ID)}{self._term}{cohortGroup}") 
-
+                # proper name convention 
+                if cohortGroups < 10:
+                    cohortProgramList.append(f"{cohortDict.get(ID)}0{self._term}0{cohortGroups}") 
+                elif cohortGroups < 20:
+                    cohortProgramList.append(f"{cohortDict.get(ID)}1{self._term}1{cohortGroups}") 
+                    
             if studentRemaining <= 25:
                 # TODO: average out the cohorts if moer than 1 cohort is made 
                 # and the last cohort is under 25 people
