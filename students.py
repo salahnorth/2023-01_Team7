@@ -21,6 +21,8 @@ class students:
             self._BKStudents = int(input("Enter number of BK Students: "))
             self._SCMStudents = int(input("Enter number of SCM Students: "))
             
+            self._term = int(input("What term is this cohort in? "))
+            
         except ValueError:
             print("Incorrect format! (Integers only)")
 
@@ -38,8 +40,9 @@ class students:
         cohortList.append(self.divide_to_cohorts(self._BKStudents, 7))
         cohortList.append(self.divide_to_cohorts(self._SCMStudents, 8))
 
-        for i in cohortList: # *****temp, for testing*****
-            print(i)
+        # for i in cohortList: # *****temp, for testing*****
+        #     print(i)
+        return(cohortList)
 
     def divide_to_cohorts(self, students, ID):
         cohortDict = {0:"BC", 1: "PC", 2:"PM", 3:"BA", 4:"GL", 5:"FS", 6:"DXD",\
@@ -50,14 +53,13 @@ class students:
 
         for student in range(students):
             studentRemaining = students
-            term = 1 # *****temp, will depend on what term it currently is*****
 
             if student % 30 == 0: 
                 # If for whatever reason we need to make cohort > or < than 30,
                 # we can.
                 cohortGroup += 1
                 studentRemaining -= student
-                cohortProgramList.append(f"{cohortDict.get(ID)}{term}{cohortGroup}") 
+                cohortProgramList.append(f"{cohortDict.get(ID)}{self._term}{cohortGroup}") 
 
             if studentRemaining <= 25:
                 # TODO: average out the cohorts if moer than 1 cohort is made 
@@ -66,6 +68,6 @@ class students:
 
         return (cohortProgramList)
     
-# if __name__ == "__main__":
-#     x = students()
-#     x.cohorts_final()
+if __name__ == "__main__":
+    x = students()
+    print(x.cohorts_final())
