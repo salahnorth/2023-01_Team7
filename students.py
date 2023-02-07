@@ -9,26 +9,21 @@ class students:
     
     def __init__(self):
 
-        try:
-            self._BCOMStudents = int(input("Enter number of BCOM Students: "))
-            self._PCOMStudents = int(input("Enter number of PCOM Students: "))
+        self._BCOMStudents = None
+        self._PCOMStudents = None
 
-            self._PMStudents = int(input("Enter number of PM Students: "))
-            self._BAStudents = int(input("Enter number of BA Students: "))
-            self._GLMStudents = int(input("Enter number of GLM Students: "))
-            self._FSStudents = int(input("Enter number of FS Students: "))
-            self._DXDStudents = int(input("Enter number of DXD Students: "))
-            self._BKStudents = int(input("Enter number of BK Students: "))
-            self._SCMStudents = int(input("Enter number of SCM Students: "))
-            
-            self._term = int(input("What term is this cohort in? "))
-            
-        except ValueError:
-            print("Incorrect format! (Integers only)")
+        self._PMStudents = None
+        self._BAStudents = None
+        self._GLMStudents = None
+        self._FSStudents = None
+        self._DXDStudents = None
+        self._BKStudents = None
+        self._SCMStudents = None
+        
+        self._term = None
 
     def cohorts_final(self):
         cohortList = []
-
         cohortList.append(self.divide_to_cohorts(self._BCOMStudents, 0))
         cohortList.append(self.divide_to_cohorts(self._PCOMStudents, 1))
 
@@ -40,8 +35,6 @@ class students:
         cohortList.append(self.divide_to_cohorts(self._BKStudents, 7))
         cohortList.append(self.divide_to_cohorts(self._SCMStudents, 8))
 
-        # for i in cohortList: # *****temp, for testing*****
-        #     print(i)
         return(cohortList)
 
     def divide_to_cohorts(self, students, ID):
@@ -70,4 +63,5 @@ class students:
     
 if __name__ == "__main__":
     x = students()
-    print(x.cohorts_final())
+    for i in x.cohorts_final():
+        print(i)
