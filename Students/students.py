@@ -8,10 +8,11 @@ the class space available, and suggest (if required) more class space
 class Classroom:
 
     def __init__(self, name, cap):
-        self._name = name.strip()
+        self._name = name
         self._cap = cap
         self._current_students = cap
         self._in_use = False
+
 
 class students:
     '''
@@ -74,13 +75,13 @@ class students:
 
         for classroom in self._classrooms:
 
-            # If any of the classroom space is used, skip over for now
-            if classroom._in_use:
-                continue
-            
             # If all students are added to all classrooms, break the loop.
             if students == 0:
                 break
+
+            # If any of the classroom space is used, skip over for now
+            if classroom._in_use:
+                continue
 
             # Check if amount of students passed to function fits in room.
             # If there are more students than space in a room, fill the room.
@@ -91,7 +92,9 @@ class students:
                 # so we fill it entirely.
                 students -= classroom._current_students
                 cohortGroup += 1
-                cohort_name = f"{cohortDict.get(ID)}{self._term}{cohortGroup}: {classroom._name}, {classroom._current_students}/{classroom._cap}"
+                termString = "{:0>2d}".format(self._term)
+                cohortString = "{:0>2d}".format(cohortGroup)
+                cohort_name = f"{cohortDict.get(ID)}{termString}{cohortString}: {classroom._name}, {classroom._current_students}/{classroom._cap}"
                 cohortProgramList.append(cohort_name)
 
                 # Set the boolean to reflect the classroom in use
@@ -103,7 +106,9 @@ class students:
                 classroom._current_students = students
                 students -= students
                 cohortGroup += 1
-                cohort_name = f"{cohortDict.get(ID)}{self._term}{cohortGroup}: {classroom._name}, {classroom._current_students}/{classroom._cap}"
+                termString = "{:0>2d}".format(self._term)
+                cohortString = "{:0>2d}".format(cohortGroup)
+                cohort_name = f"{cohortDict.get(ID)}{termString}{cohortString}: {classroom._name}, {classroom._current_students}/{classroom._cap}"
                 cohortProgramList.append(cohort_name)
 
                 # Set the classroom boolean as in use
@@ -152,4 +157,5 @@ class students:
                 pass
 
         return (cohortProgramList)
+
         """

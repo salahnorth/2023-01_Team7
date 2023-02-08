@@ -2,7 +2,7 @@
 Author: Fahad Ali
 Student ID: 3099218
 Description: Create main GUI app
-References:
+References: 
 https://www.geeksforgeeks.org/pyqt5-input-dialog-python/
 https://www.pythonguis.com/tutorials/pyqt-dialogs/
 '''
@@ -11,7 +11,7 @@ import Students
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5.QtCore import pyqtRemoveInputHook
+from PyQt5.QtCore import *
 
 
 class MainWindow(QWidget):
@@ -20,52 +20,51 @@ class MainWindow(QWidget):
     that have different dialogs for each UI element
     '''
     # main window class
-    def __init__(self):
+    def __init__(self, parent = None):
         # initialize main window
-        super().__init__()
+        # super().__init__()
+        super (MainWindow, self).__init__(parent)
         self.resize(600, 400)
         self.setWindowTitle("Schedule")
         self.setupUI()
-
+        
     def cohort_button(self):
         # create cohort dialog
-        cohortDialog = CohortDialog()
-        cohortDialog.exec()
-
+        cohortDialog = CreateCohortDialog(self)
+        cohortDialog.open()
+        
     def schedule_button(self):
         scheduleDialog = ScheduleDialog()
-        scheduleDialog.exec()
-
+        scheduleDialog.open()
+        
     def setupUI(self):
         # create layout
         mainlLayout = QHBoxLayout(self)
-
+        
         # create cohort button and execute dialog
         cohortButton = QPushButton("Click to Setup Cohorts", self)
-        cohortButton.resize(200, 100)
         cohortButton.clicked.connect(self.cohort_button)
-
+        
         #TODO: make scheudule functionality and dialog
         scheduleButton = QPushButton("Click to see Schedules", self)
-        scheduleButton.resize(200, 100)
         scheduleButton.clicked.connect(self.schedule_button)
-
+        
         # add buttonts to layout
         mainlLayout.addWidget(cohortButton, 1)
         mainlLayout.addWidget(scheduleButton, 1)
         # set layout
         self.setLayout(mainlLayout)
 
-class CohortDialog(QDialog):
+class CreateCohortDialog(QDialog):
     '''
     Description: This is the cohort dialog class, it will ask for input of the term
     and students in each program and output the cohorts
     '''
-    def __init__(self):
+    def __init__(self, parent):
         # initialize the window
-        super().__init__()
+        super(CreateCohortDialog, self).__init__(parent)
         self.resize(500, 400)
-        self.formGroupBox = QGroupBox("Cohort")
+        self.form = QGroupBox("Cohort")
 
         # creating a line edit texts for each program and set integer parameters
         onlyInt = QIntValidator()
@@ -100,72 +99,118 @@ class CohortDialog(QDialog):
         self.setup_input()
 
         # creating a dialog button for ok and cancel
-        self.buttonBox = QDialogButtonBox(QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
-        # add functionality when "ok" clicked
+        self.buttonBox = QDialogButtonBox(QDialogButtonBox.Cancel | QDialogButtonBox.Save)
+        
+        # create cohort show button
+        cohortShow = QPushButton("Click to see cohorts (please save first!)")
+        
+        # add functionality when "Cancel" clicked
         self.buttonBox.rejected.connect(self.reject)
-        # add functionality when "ok" clicked
+        # add functionality when "Save" clicked
         self.buttonBox.accepted.connect(self.create_cohorts)
-
+        
+        # TODO: add dialog that gives error when save not clicked first
+        # if self.buttonBox.accepted:
+        # add functionality when "Clicked to show cohort" after saving
+        cohortShow.clicked.connect(self.display_cohorts)
+        # else:
+        #     pass
+        
         # create a veritcal layout
         cohortLayout = QVBoxLayout()
-        cohortLayout.addWidget(self.formGroupBox)
+        cohortLayout.addWidget(self.form)
         # add button to the layout
         cohortLayout.addWidget(self.buttonBox)
+        cohortLayout.addWidget(cohortShow)
         # set lay out
         self.setLayout(cohortLayout)
 
     def create_cohorts(self):
         # call students class
-        studentCohort = Students.students()
+        self._studentCohort = Students.students()
 
         # assign input to class attributes
-        studentCohort._term = int(self.term.text())
-        studentCohort._BCOMStudents = int(self.BCOM.text())
-        studentCohort._PCOMStudents = int(self.PCOM.text())
-        studentCohort._PMStudents = int(self.PM.text())
-        studentCohort._BAStudents = int(self.BA.text())
-        studentCohort._GLMStudents = int(self.GLM.text())
-        studentCohort._FSStudents = int(self.FS.text())
-        studentCohort._DXDStudents = int(self.DXD.text())
-        studentCohort._BKStudents = int(self.BK.text())
-        studentCohort._SCMStudents = int(self.SCM.text())
-        for programs in studentCohort.cohorts_final():
-            for cohort in programs:
-                print(cohort)
+        self._studentCohort._term = int(self.term.text())
+        self._studentCohort._BCOMStudents = int(self.BCOM.text())
+        self._studentCohort._PCOMStudents = int(self.PCOM.text())
+        self._studentCohort._PMStudents = int(self.PM.text())
+        self._studentCohort._BAStudents = int(self.BA.text())
+        self._studentCohort._GLMStudents = int(self.GLM.text())
+        self._studentCohort._FSStudents = int(self.FS.text())
+        self._studentCohort._DXDStudents = int(self.DXD.text())
+        self._studentCohort._BKStudents = int(self.BK.text())
+        self._studentCohort._SCMStudents = int(self.SCM.text())
 
-        # print(studentCohort.cohorts_final())
+        # create cohort final attribute
+        self._cohortFinal = self._studentCohort.cohorts_final()
+
+        return self._cohortFinal
+
+    def display_cohorts(self):
+        # create cohort table object
+        CohortTable(self)
 
     def setup_input(self):
         # create a form layout
         studentInput = QFormLayout()
 
-        studentInput.addRow(QLabel("Input term number: "), self.term)
+        studentInput.addRow(QLabel("Select term number: "), self.term) 
         studentInput.addRow(QLabel("Business Communication (BCOM)"), self.BCOM)
         studentInput.addRow(QLabel("Professional Communication (PCOM)"), self.PCOM)
-        studentInput.addRow(QLabel("Project Management (PM)"), self.PM)
-        studentInput.addRow(QLabel("Business Analysis (BA)"), self.BA)
-        studentInput.addRow(QLabel("Global Logistics Management (GLM)"), self.GLM)
-        studentInput.addRow(QLabel("Full Stack Web Development (FS)"), self.FS)
-        studentInput.addRow(QLabel("Digital Experience Design Foundation (DXD)"), self.DXD)
-        studentInput.addRow(QLabel("BookKeeping Certificate (BK)"), self.BK)
-        studentInput.addRow(QLabel("Supply Chain Management (SCM)"), self.SCM)
+        studentInput.addRow(QLabel("Project Management (PM)"), self.PM) 
+        studentInput.addRow(QLabel("Business Analysis (BA)"), self.BA) 
+        studentInput.addRow(QLabel("Global Logistics Management (GLM)"), self.GLM) 
+        studentInput.addRow(QLabel("Full Stack Web Development (FS)"), self.FS) 
+        studentInput.addRow(QLabel("Digital Experience Design Foundation (DXD)"), self.DXD) 
+        studentInput.addRow(QLabel("BookKeeping Certificate (BK)"), self.BK) 
+        studentInput.addRow(QLabel("Supply Chain Management (SCM)"), self.SCM) 
 
         # set the layout
-        self.formGroupBox.setLayout(studentInput)
+        self.form.setLayout(studentInput)
+
+class CohortTable(QWidget):
+    '''
+    Description: This class creates a table of the cohort groups
+    '''
+    def __init__(self, CreateCohortDialog):
+        super().__init__(CreateCohortDialog)
+        self.table = QTableWidget()
+        
+        self.table.setColumnCount(len(CreateCohortDialog._cohortFinal))
+        self.table.setRowCount(len(max(CreateCohortDialog._cohortFinal,key=len)))
+
+        header_list = ["BCOM", "PCOM", "PM", "BA", "GLM", "FS", "DXD", "BK", "SCM"]
+        self.table.setHorizontalHeaderLabels(header_list)
+
+        # Resize header
+        header = self.table.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
+        for _ in range(len(header_list)):
+            header.setSectionResizeMode(_, QHeaderView.ResizeMode.Stretch)
+
+        self.table.resize(500,500)
+        
+        j = 0
+        for cohortLists in CreateCohortDialog._cohortFinal:
+            i = 0
+            for cohorts in cohortLists:
+                self.table.setItem(i, j, QTableWidgetItem(cohorts))
+                i += 1
+            j += 1
+        
+        self.table.show()
 
 class ScheduleDialog(QDialog):
     # TODO: add schedules
-	def __init__(self):
-		# initialize the window
-		super().__init__()
-		self.resize(500, 400)
-		self.formGroupBox = QGroupBox("Schedules")
+    def __init__(self):
+        # initialize the window
+        super().__init__()
+        self.resize(500, 400)
 
 def main():
     pyqtRemoveInputHook()
-
+    
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
     app.exec()
-
