@@ -1,7 +1,7 @@
 '''
 Author: Fahad Ali
 Student ID: 3099218
-Description: This program will create cohorts of the best size depending on 
+Description: This program will create cohorts of the best size depending on
 the class space available, and suggest (if required) more class space
 '''
 
@@ -31,7 +31,7 @@ class students:
         self._DXDStudents = None
         self._BKStudents = None
         self._SCMStudents = None
-        
+
         self._term = None
 
         # Setup list of classrooms. Done by reading from a csv
@@ -66,7 +66,7 @@ class students:
         cohortList.append(self.divide_to_cohorts(self._SCMStudents, 8))
 
         return(cohortList)
-    
+
     def divide_to_cohorts(self, students, ID):
         cohortDict = {0:"BC", 1: "PC", 2:"PM", 3:"BA", 4:"GL", 5:"FS", 6:"DXD",\
                         7:"BK", 8:"SCM"}
@@ -86,7 +86,7 @@ class students:
             # Check if amount of students passed to function fits in room.
             # If there are more students than space in a room, fill the room.
             if students >= classroom._cap:
-                
+
                 # Fill space in classrooms by simply removing the cap from the space
                 # remaining. This is done because there are more students than capcity,
                 # so we fill it entirely.
@@ -113,7 +113,7 @@ class students:
 
                 # Set the classroom boolean as in use
                 classroom._in_use = True
-        
+
         # If the ID is one 1, reset dictionary as we are moving on to electives
         if ID == 1:
             for classroom in self._classrooms:
@@ -121,41 +121,4 @@ class students:
                 classroom._current_students = classroom._cap
 
         return (cohortProgramList)
-    
-    """
 
-    def divide_to_cohorts(self, students, ID):
-        '''
-        Description: this function will assign the appropriate prefix and 
-        divide by cohort size and return a list
-        Returns: a list of cohort strings
-        '''
-        # initialize values
-        cohortDict = {0:"BC", 1: "PC", 2:"PM", 3:"BA", 4:"GL", 5:"FS", 6:"DXD",\
-                      7:"BK", 8:"SCM"}
-        cohortProgramList = []
-        cohortGroups = 0
-        studentRemaining = 0
-        cohortSize = 30 # change to whatever size cohort is needed
-
-        # loop through students in a program
-        for student in range(students):
-            studentRemaining = students
-            # put into cohort groups
-            if student % cohortSize == 0: 
-                cohortGroups += 1
-                studentRemaining -= student
-                # proper name convention 
-                if cohortGroups < 10:
-                    cohortProgramList.append(f"{cohortDict.get(ID)}0{self._term}0{cohortGroups}") 
-                elif cohortGroups < 20:
-                    cohortProgramList.append(f"{cohortDict.get(ID)}1{self._term}1{cohortGroups}") 
-                    
-            if studentRemaining <= 25:
-                # TODO: average out the cohorts if moer than 1 cohort is made 
-                # and the last cohort is under 25 people
-                pass
-
-        return (cohortProgramList)
-
-        """
