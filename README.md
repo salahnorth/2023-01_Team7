@@ -1,5 +1,5 @@
 # Author
-Fahad Ali
+Fahad Ali  
 Schuyler Kelly
 
 # GUI and Cohort functionality
