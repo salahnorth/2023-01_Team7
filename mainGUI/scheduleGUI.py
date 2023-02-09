@@ -2,7 +2,7 @@
 Author: Fahad Ali
 Student ID: 3099218
 Description: Create main GUI app
-References:
+References: 
 https://www.geeksforgeeks.org/pyqt5-input-dialog-python/
 https://www.pythonguis.com/tutorials/pyqt-dialogs/
 '''
@@ -27,28 +27,28 @@ class MainWindow(QWidget):
         self.resize(600, 400)
         self.setWindowTitle("Schedule")
         self.setupUI()
-
+        
     def cohort_button(self):
         # create cohort dialog
         cohortDialog = CreateCohortDialog(self)
         cohortDialog.open()
-
+        
     def schedule_button(self):
         scheduleDialog = ScheduleDialog()
         scheduleDialog.open()
-
+        
     def setupUI(self):
         # create layout
         mainlLayout = QHBoxLayout(self)
-
+        
         # create cohort button and execute dialog
         cohortButton = QPushButton("Click to Setup Cohorts", self)
         cohortButton.clicked.connect(self.cohort_button)
-
+        
         #TODO: make scheudule functionality and dialog
         scheduleButton = QPushButton("Click to see Schedules", self)
         scheduleButton.clicked.connect(self.schedule_button)
-
+        
         # add buttonts to layout
         mainlLayout.addWidget(cohortButton, 1)
         mainlLayout.addWidget(scheduleButton, 1)
@@ -100,22 +100,22 @@ class CreateCohortDialog(QDialog):
 
         # creating a dialog button for ok and cancel
         self.buttonBox = QDialogButtonBox(QDialogButtonBox.Cancel | QDialogButtonBox.Save)
-
+        
         # create cohort show button
         cohortShow = QPushButton("Click to see cohorts (please save first!)")
-
+        
         # add functionality when "Cancel" clicked
         self.buttonBox.rejected.connect(self.reject)
         # add functionality when "Save" clicked
         self.buttonBox.accepted.connect(self.create_cohorts)
-
+        
         # TODO: add dialog that gives error when save not clicked first
         # if self.buttonBox.accepted:
         # add functionality when "Clicked to show cohort" after saving
         cohortShow.clicked.connect(self.display_cohorts)
         # else:
         #     pass
-
+        
         # create a veritcal layout
         cohortLayout = QVBoxLayout()
         cohortLayout.addWidget(self.form)
@@ -154,16 +154,16 @@ class CreateCohortDialog(QDialog):
         # create a form layout
         studentInput = QFormLayout()
 
-        studentInput.addRow(QLabel("Select term number: "), self.term)
+        studentInput.addRow(QLabel("Select term number: "), self.term) 
         studentInput.addRow(QLabel("Business Communication (BCOM)"), self.BCOM)
         studentInput.addRow(QLabel("Professional Communication (PCOM)"), self.PCOM)
-        studentInput.addRow(QLabel("Project Management (PM)"), self.PM)
-        studentInput.addRow(QLabel("Business Analysis (BA)"), self.BA)
-        studentInput.addRow(QLabel("Global Logistics Management (GLM)"), self.GLM)
-        studentInput.addRow(QLabel("Full Stack Web Development (FS)"), self.FS)
-        studentInput.addRow(QLabel("Digital Experience Design Foundation (DXD)"), self.DXD)
-        studentInput.addRow(QLabel("BookKeeping Certificate (BK)"), self.BK)
-        studentInput.addRow(QLabel("Supply Chain Management (SCM)"), self.SCM)
+        studentInput.addRow(QLabel("Project Management (PM)"), self.PM) 
+        studentInput.addRow(QLabel("Business Analysis (BA)"), self.BA) 
+        studentInput.addRow(QLabel("Global Logistics Management (GLM)"), self.GLM) 
+        studentInput.addRow(QLabel("Full Stack Web Development (FS)"), self.FS) 
+        studentInput.addRow(QLabel("Digital Experience Design Foundation (DXD)"), self.DXD) 
+        studentInput.addRow(QLabel("BookKeeping Certificate (BK)"), self.BK) 
+        studentInput.addRow(QLabel("Supply Chain Management (SCM)"), self.SCM) 
 
         # set the layout
         self.form.setLayout(studentInput)
@@ -175,26 +175,12 @@ class CohortTable(QWidget):
     def __init__(self, CreateCohortDialog):
         super().__init__(CreateCohortDialog)
         self.table = QTableWidget()
-
-        self.table.setColumnCount(len(CreateCohortDialog._cohortFinal))
-        self.table.setRowCount(len(max(CreateCohortDialog._cohortFinal,key=len)))
-
-        header_list = ["BCOM", "PCOM", "PM", "BA", "GLM", "FS", "DXD", "BK", "SCM"]
-        self.table.setHorizontalHeaderLabels(header_list)
-
-        # Resize header
-        header = self.table.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
-        for _ in range(len(header_list)):
-            header.setSectionResizeMode(_, QHeaderView.ResizeMode.Stretch)
-
         self.table.setColumnCount(len(CreateCohortDialog._cohortFinal))
         self.table.setRowCount(len(max(CreateCohortDialog._cohortFinal,key=len)))
         self.table.setHorizontalHeaderLabels(["BCOM", "PCOM", "PM", "BA", "GLM"\
             ,"FS", "DXD", "BK", "SCM"])
-
         self.table.resize(500,500)
-
+        
         j = 0
         for cohortLists in CreateCohortDialog._cohortFinal:
             i = 0
@@ -202,7 +188,7 @@ class CohortTable(QWidget):
                 self.table.setItem(i, j, QTableWidgetItem(cohorts))
                 i += 1
             j += 1
-
+        
         self.table.show()
 
 class ScheduleDialog(QDialog):
@@ -214,7 +200,7 @@ class ScheduleDialog(QDialog):
 
 def main():
     pyqtRemoveInputHook()
-
+    
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
