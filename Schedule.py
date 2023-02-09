@@ -61,7 +61,7 @@ class Schedule:
 if __name__ == '__main__':
 
     # Define the rooms
-    rooms = [Room(1, 36), Room(2, 36), Room(3, 24), Room(4, 24), Room(5, 24), Room(6, 40), Room(7, 30), Room(8, 30)]
+    rooms = [Room(1, 34), Room(2, 36), Room(3, 24), Room(4, 24), Room(5, 24), Room(6, 40), Room(7, 30), Room(8, 30)]
 
     # Define the cohorts
     cohorts = [Cohort("PCOM", 36), Cohort("BCOM", 30), Cohort("PM", 24), Cohort("BA", 28), Cohort("FS", 33), Cohort("DXD", 35)]
