@@ -6,7 +6,7 @@ Purpose: Testing the room scheduling of cohorts.
 
 """
 
-# Import the room, cohort and timetable classes
+# Import the room, cohort, course and timetable classes
 from Room import *
 from Cohort import *
 from Timetable import *
