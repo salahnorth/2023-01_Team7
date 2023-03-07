@@ -3,7 +3,6 @@ Author: Salah Mohamed
 ID: 3044504
 Date: 14/02/2023
 Purpose: Testing the room scheduling of cohorts.
-
 """
 
 # Import the room, cohort, course and timetable classes
