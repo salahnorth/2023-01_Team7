@@ -1,25 +1,3 @@
-class Course:
-    def __init__(self, name, size, course_type, program):
-        self.name = name
-        self.size = size
-        self.course_type = course_type
-        self.cohorts = []  # A list to store cohorts
-        self.program = program
-    
-    def __str__(self):
-        return f'{self.name} ({self.size})'
-    
-    # Split the course into cohorts of equal size
-    def split_cohorts(self):
-        num_cohorts = self.size // 30  # Each cohort has a maximum size of 30
-        cohort_size = self.size // num_cohorts
-        for i in range(num_cohorts):
-            cohort_name = f'{self.name}_{i+1}'
-            cohort = {'name': cohort_name, 'size': cohort_size, 'type': self.course_type, 'schedule': [], 'program': self.program}
-            self.cohorts.append(cohort)
-
-    
-
 class Room:
     def __init__(self, name, capacity):
         self.name = name
@@ -97,25 +75,27 @@ class Timetable:
 
 rooms = [Room('R1', 100), Room('R2', 75), Room('R3', 50)]
 
-# Create a course and split it into cohorts
-c1 = Course('PRDV 0201', 90, 'lecture', 'core')
-c2 = Course('PRDV 0202', 75, 'lecture', 'specific')
-c3 = Course('PRDV 0203', 60, 'lab', 'specfic')
+# Create cohorts
 
-c1.split_cohorts()
-c2.split_cohorts()
-c3.split_cohorts()
+cohort1 = {'name': 'PRDV 0201_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'core'}
+cohort2 = {'name': 'PRDV 0201_2', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'core'}
+cohort3 = {'name': 'PRDV 0201_3', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'core'}
+cohort4 = {'name': 'PRDV 0202_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specifc'}
+cohort5 = {'name': 'PRDV 0202_2', 'size': 15, 'type': 'lecture', 'schedule': [], 'program': 'spcific'}
+cohort6 = {'name': 'PRDV 0203_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specific'}
+cohort7 = {'name': 'PRDV 0203_2', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specific'}
+
 
 # Create a timetable with the three rooms and the cohorts from the course
-all_cohorts = c1.cohorts + c2.cohorts + c3.cohorts
+all_cohorts = [cohort1] + [cohort2] + [cohort3] + [cohort4] + [cohort5] + [cohort6] + [cohort7]
 timetable = Timetable([rooms[0], rooms[1], rooms[2]], all_cohorts)
 
-timetable.schedule_cohort(c1.cohorts[0], 'Thursday', 9, 10)
-timetable.schedule_cohort(c1.cohorts[1], 'Wednesday', 9, 10)
-timetable.schedule_cohort(c1.cohorts[2], 'Wednesday', 9, 10)
+timetable.schedule_cohort(cohort1, 'Thursday', 9, 10)
+timetable.schedule_cohort(cohort2, 'Wednesday', 9, 10)
+timetable.schedule_cohort(cohort3, 'Wednesday', 9, 10)
 
-timetable.schedule_cohort(c2.cohorts[0], 'Tuesday', 9, 10)
-timetable.schedule_cohort(c2.cohorts[1], 'Wednesday', 14, 15)
+timetable.schedule_cohort(cohort4, 'Tuesday', 9, 10)
+timetable.schedule_cohort(cohort5, 'Wednesday', 14, 15)
 
-timetable.schedule_cohort(c3.cohorts[0], 'Thursday', 12, 13)
-timetable.schedule_cohort(c3.cohorts[1], 'Tuesday', 12, 13)
+timetable.schedule_cohort(cohort6, 'Thursday', 12, 13)
+timetable.schedule_cohort(cohort7, 'Tuesday', 12, 13)
