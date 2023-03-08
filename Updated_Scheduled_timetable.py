@@ -90,7 +90,7 @@ cohort2 = {'name': 'PRDV 0202_1', 'size': 30, 'type': 'lecture', 'schedule': [],
 cohort3 = {'name': 'PRDV 0202_2', 'size': 15, 'type': 'lecture', 'schedule': [], 'program': 'spcific'}
 cohort4 = {'name': 'PRDV 0203_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specific'}
 cohort5 = {'name': 'PRDV 0203_2', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specific'}
-cohort6 = {'name': 'PRDV 0204_1', 'size': 30, 'type': 'lab', 'schedule': [], 'program': 'specific'}
+cohort6 = {'name': 'PRDV 0204_1_LAB', 'size': 30, 'type': 'lab', 'schedule': [], 'program': 'specific'}
 cohort7 = {'name': 'PRDV 0204_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specific'}
 
 
