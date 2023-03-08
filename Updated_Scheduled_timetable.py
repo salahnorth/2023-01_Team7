@@ -1,3 +1,11 @@
+"""
+Author: Salah Mohamed
+ID: 3044504
+Date: 07/03/2023
+Purpose: Scheduling the cohorts in rooms with
+         added time restriction, lab and core program requirements
+"""
+
 class Room:
     def __init__(self, name, capacity):
         self.name = name
@@ -73,10 +81,10 @@ class Timetable:
         if not room_scheduled:
             print(f'{cohort["name"]} could not be scheduled in any available room during this time.')
 
+# Create rooms
 rooms = [Room('R1', 100), Room('R2', 75), Room('R3', 50)]
 
 # Create cohorts
-
 cohort1 = {'name': 'PCOM 0101', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'core'}
 cohort2 = {'name': 'PRDV 0202_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specifc'}
 cohort3 = {'name': 'PRDV 0202_2', 'size': 15, 'type': 'lecture', 'schedule': [], 'program': 'spcific'}
@@ -86,7 +94,7 @@ cohort6 = {'name': 'PRDV 0204_1', 'size': 30, 'type': 'lab', 'schedule': [], 'pr
 cohort7 = {'name': 'PRDV 0204_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specific'}
 
 
-# Create a timetable with the three rooms and the cohorts from the course
+# Create a timetable with the three rooms and the cohorts
 all_cohorts = [cohort1] + [cohort2] + [cohort3] + [cohort4] + [cohort5] + [cohort6] + [cohort7]
 timetable = Timetable([rooms[0], rooms[1], rooms[2]], all_cohorts)
 
