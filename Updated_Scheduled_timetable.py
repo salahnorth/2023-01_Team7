@@ -77,13 +77,13 @@ rooms = [Room('R1', 100), Room('R2', 75), Room('R3', 50)]
 
 # Create cohorts
 
-cohort1 = {'name': 'PRDV 0201_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'core'}
-cohort2 = {'name': 'PRDV 0201_2', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'core'}
-cohort3 = {'name': 'PRDV 0201_3', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'core'}
-cohort4 = {'name': 'PRDV 0202_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specifc'}
-cohort5 = {'name': 'PRDV 0202_2', 'size': 15, 'type': 'lecture', 'schedule': [], 'program': 'spcific'}
-cohort6 = {'name': 'PRDV 0203_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specific'}
-cohort7 = {'name': 'PRDV 0203_2', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specific'}
+cohort1 = {'name': 'PCOM 0101', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'core'}
+cohort2 = {'name': 'PRDV 0202_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specifc'}
+cohort3 = {'name': 'PRDV 0202_2', 'size': 15, 'type': 'lecture', 'schedule': [], 'program': 'spcific'}
+cohort4 = {'name': 'PRDV 0203_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specific'}
+cohort5 = {'name': 'PRDV 0203_2', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specific'}
+cohort6 = {'name': 'PRDV 0204_1', 'size': 30, 'type': 'lab', 'schedule': [], 'program': 'specific'}
+cohort7 = {'name': 'PRDV 0204_1', 'size': 30, 'type': 'lecture', 'schedule': [], 'program': 'specific'}
 
 
 # Create a timetable with the three rooms and the cohorts from the course
@@ -91,11 +91,10 @@ all_cohorts = [cohort1] + [cohort2] + [cohort3] + [cohort4] + [cohort5] + [cohor
 timetable = Timetable([rooms[0], rooms[1], rooms[2]], all_cohorts)
 
 timetable.schedule_cohort(cohort1, 'Thursday', 9, 10)
-timetable.schedule_cohort(cohort2, 'Wednesday', 9, 10)
-timetable.schedule_cohort(cohort3, 'Wednesday', 9, 10)
+timetable.schedule_cohort(cohort2, 'Thursday', 9, 10)
+timetable.schedule_cohort(cohort3, 'Thursday', 9, 10)
 
-timetable.schedule_cohort(cohort4, 'Tuesday', 9, 10)
-timetable.schedule_cohort(cohort5, 'Wednesday', 14, 15)
-
-timetable.schedule_cohort(cohort6, 'Thursday', 12, 13)
-timetable.schedule_cohort(cohort7, 'Tuesday', 12, 13)
+timetable.schedule_cohort(cohort4, 'Thursday', 9, 10)
+timetable.schedule_cohort(cohort5, 'Thursday', 9, 10)
+timetable.schedule_cohort(cohort6, 'Tuesday', 9, 10)
+timetable.schedule_cohort(cohort7, 'Tuesday', 9, 10)
